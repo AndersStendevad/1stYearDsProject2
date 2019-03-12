@@ -31,8 +31,8 @@ MANIFEST
 *.manifest
 *.spec
 
-*.DS_sore
-.swp
+.DS_sore
+*.swp
 
 # Installer logs
 pip-log.txt
