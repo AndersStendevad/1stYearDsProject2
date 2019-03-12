@@ -31,8 +31,11 @@ MANIFEST
 *.manifest
 *.spec
 
-.DS_sore
+# Ignore temporary files from macOS / editors
+*.DS_Store
+*~
 *.swp
+*.swo
 
 # Installer logs
 pip-log.txt
