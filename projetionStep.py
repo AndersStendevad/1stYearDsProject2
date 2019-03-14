@@ -1,11 +1,17 @@
 import libraries.network_map2 as nm2
+import libraries.backboning as bb
 import fileManagement as fm
+import networkx as nx
 
 
-def projetionStep(filename,projection_type):
-    G = nx.read_adjlist(fm.path(filename),delimiter = " ", nodetype = int)
+def projetionStep(projection_type="simple", freshStart=False):
+    if freshStart == False:
+        return None
+    G = nx.read_adjlist(fm.path(fm.rawData),delimiter = " ", nodetype = int)
     nodes = nx.algorithms.bipartite.sets(G)
-    fm.projectionToCsv(transform_for_bb(projection(G,nodes,projection_type)))
+    customer = sorted(list(nodes[1]))
+    print(len(customer))
+    fm.projetionToCsv(transform_for_bb(projection(G,customer,projection_type)))
 
 def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''
@@ -47,4 +53,4 @@ def projection(G,nodes,projection_type):
         '\'simple\' for simple projection\n'+
         '\'hyperbolic\' for hyperbolic projection\n'+
         '\'probs\' for  resource allocation projection\n'+
-        '\'ycn\' for raandom walks based projection\n'+)
+        '\'ycn\' for raandom walks based projection\n')

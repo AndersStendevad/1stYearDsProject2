@@ -7,7 +7,7 @@ import discoveryStep as ds
 
 def main():
 
-    ps.projetionStep(edgelistFile = "toy_data.txt")
+    ps.projetionStep(freshStart = True)
 
     bbs.backboningStep()
 

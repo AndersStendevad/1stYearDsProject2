@@ -3,6 +3,8 @@ import networkx as nx
 
 ########################################
 
+rawData = "toy_data.txt"
+
 dataFile = "mainData.csv"
 
 projetionFile = "projetionData.csv"
