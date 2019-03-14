@@ -1,3 +1,4 @@
+import networkx as nx
 import libraries.network_map2 as nm2
 import libraries.backboning as bb
 import fileManagement as fm
@@ -10,6 +11,7 @@ def projetionStep(projection_type="simple", freshStart=True):
     G = nx.read_adjlist(fm.path(fm.rawData),delimiter = " ", nodetype = int)
     nodes = nx.algorithms.bipartite.sets(G)
     customer = sorted(list(nodes[1]))
+    queries = sorted(list(nodes[0]))
     fm.projetionToCsv(transform_for_bb(projection(G,customer,projection_type)))
 
 def transform_for_bb(G):

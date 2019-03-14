@@ -23,8 +23,5 @@ def main():
     elif argument == "ds":
         ds.discoveryStep()
 
-
-    #profit("?")
-
 if __name__ == '__main__':
     main()
