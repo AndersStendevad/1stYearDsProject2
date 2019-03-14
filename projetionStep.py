@@ -8,11 +8,22 @@ import networkx as nx
 def projetionStep(projection_type="simple", freshStart=True):
     if freshStart == False:
         return None
-    G = nx.read_adjlist(fm.path(fm.rawData),delimiter = " ", nodetype = int)
+    filename = fm.rawData
+    path = fm.path(filename)
+    G = nx.read_adjlist(path,delimiter = " ", nodetype = int)
     nodes = nx.algorithms.bipartite.sets(G)
     customer = sorted(list(nodes[1]))
     queries = sorted(list(nodes[0]))
-    fm.projetionToCsv(transform_for_bb(projection(G,customer,projection_type)))
+    C = projection(G,customer,projection_type)#projected graph of customers
+    Q = projection(G,queries,projection_type)#projected graph of queries
+    saveProjectoins(C,Q,projection_type,filename)
+
+def saveProjectoins(C,Q,projection_type,filename):
+        customer_df = transform_for_bb(C)
+        query_df = transform_for_bb(Q)
+        filename = filename.split('.')[0]
+        fm.saveToCsv(customer_df,projection_type + '_' + filename + '_custmer.csv')
+        fm.saveToCsv(query_df,projection_type + '_' + filename + '_query.csv')
 
 def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''
