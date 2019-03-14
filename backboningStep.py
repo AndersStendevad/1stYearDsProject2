@@ -1,7 +1,7 @@
 import libraries.backboning as bb
 import fileManagement as fm
 
-def backboningStep(freshStart=False):
+def backboningStep(freshStart=True):
     if freshStart == False:
         return None
 
