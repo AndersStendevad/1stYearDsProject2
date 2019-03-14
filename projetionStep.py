@@ -1,10 +1,11 @@
+import networkx as nx
 import libraries.network_map2 as nm2
 import libraries.backboning as bb
 import fileManagement as fm
 import networkx as nx
 
 
-def projetionStep(projection_type="simple", freshStart=False):
+def projetionStep(projection_type="simple", freshStart=True):
     if freshStart == False:
         return None
     G = nx.read_adjlist(fm.path(fm.rawData),delimiter = " ", nodetype = int)
