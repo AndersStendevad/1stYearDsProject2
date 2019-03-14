@@ -3,4 +3,6 @@ import fileManagement as fm
 
 def projetionStep(filename):
 
+    # Your code here
+
     fm.projetionToCsv(dataframe)
