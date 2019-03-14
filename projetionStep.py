@@ -12,7 +12,6 @@ def projetionStep(projection_type="simple", freshStart=True):
     nodes = nx.algorithms.bipartite.sets(G)
     customer = sorted(list(nodes[1]))
     queries = sorted(list(nodes[0]))
-    print(len(customer))
     fm.projetionToCsv(transform_for_bb(projection(G,customer,projection_type)))
 
 def transform_for_bb(G):
