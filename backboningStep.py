@@ -5,7 +5,7 @@ def backboningStep(freshStart=True):
     if freshStart == False:
         return None
 
-    dataframe = fm.edgelistIntoMemory()
+    dataframe = fm.projetionIntoMemory()
     print(dataframe)
     # Your code here
 
