@@ -13,8 +13,5 @@ def main():
 
     ds.discoveryStep()
 
-
-    #profit("?")
-
 if __name__ == '__main__':
     main()

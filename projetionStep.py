@@ -1,3 +1,4 @@
+import networkx as nx
 import libraries.network_map2 as nm2
 import libraries.backboning as bb
 import fileManagement as fm
