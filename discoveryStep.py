@@ -1,8 +1,6 @@
 import fileManagement as fm
 
 def discoveryStep(freshStart=True):
-    if freshStart == False:
+    if not freshStart:
         return None
     fm.backboningIntoMemory()
-
-    # Your code here

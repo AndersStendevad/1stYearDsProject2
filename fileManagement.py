@@ -1,42 +1,39 @@
 import pandas as pd
 import networkx as nx
 
-########################################
+### This is global variables like filenames ###
 
 rawData = "toy_data.txt"
-
 dataFile = "mainData.csv"
-
 projetionFile = "projetionData.csv"
-
 backboningFile = "backboningData.csv"
 
-#########################################
+### This is the generic functions that enable basic functions ###
 
-def dataIntoMemory(filename):
-    return pd.read_csv(path(filename))
+def dataIntoMemory(filename): # Say you want to read a file into memory
+    return pd.read_csv(path(filename)) # It returns a pandas dataframe
 
-def saveToCsv(dataframe,outputName):
-    dataframe.to_csv(path(outputName))
 
-def path(filename):
+def saveToCsv(dataframe,outputName): # Say you want to save at dataframe to a file
+    dataframe.to_csv(path(outputName)) # It will place the file in the Data folder
+
+
+def path(filename): # Simple code that turns the filename into a path
     return "Data/"+filename
 
-#########################################
 
-def projetionIntoMemory():
+### Special functions that always has the same filenames ###
+
+def projetionIntoMemory(): # specialcase for projetion
     return dataIntoMemory(projetionFile)
 
-def backboningIntoMemory():
+def backboningIntoMemory(): # specialcase for backboning
     return dataIntoMemory(backboningFile)
 
-
-#########################################
-
+### Special functions that always has the same filenames ###
 
 def projetionToCsv(dataframe):
     saveToCsv(dataframe,projetionFile)
 
-
-def backboningToCsv(dataframe):
-    saveToCsv(dataframe,backboningFile)
+def backboningToCsv(dataframe): # specialcase for backboning
+    saveToCsv(dataframe,backboningFile) # specialcase for projetion
