@@ -10,7 +10,6 @@ def projetionStep(projection_type="simple", freshStart=True):
     G = nx.read_adjlist(fm.path(fm.rawData),delimiter = " ", nodetype = int)
     nodes = nx.algorithms.bipartite.sets(G)
     customer = sorted(list(nodes[1]))
-    print(len(customer))
     fm.projetionToCsv(transform_for_bb(projection(G,customer,projection_type)))
 
 def transform_for_bb(G):

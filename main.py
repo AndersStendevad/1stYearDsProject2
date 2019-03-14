@@ -5,17 +5,17 @@ import discoveryStep as ds
 
 
 def main():
-    argument = input("write ps , bbs, ds, all")
+    argument = input("write ps , bbs, ds, all \n")
     if argument == "all":
 
-        ps.projetionStep(freshStart = True)
+        ps.projetionStep()
 
         bbs.backboningStep()
 
         ds.discoveryStep()
 
     elif argument == "ps":
-        ps.projetionStep(freshStart = True)
+        ps.projetionStep()
 
     elif argument == "bbs":
         bbs.backboningStep()

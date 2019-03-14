@@ -25,10 +25,10 @@ def path(filename):
 #########################################
 
 def projetionIntoMemory():
-    dataIntoMemory(projetionFile)
+    return dataIntoMemory(projetionFile)
 
 def backboningIntoMemory():
-    dataIntoMemory(backboningFile)
+    return dataIntoMemory(backboningFile)
 
 
 #########################################
