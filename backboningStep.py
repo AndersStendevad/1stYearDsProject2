@@ -1,7 +1,9 @@
-import libraries.bacckboning as bb
-import fileManipulation as fm
+import libraries.backboning as bb
+import fileManagement as fm
 
 def backboningStep():
-    return 1+2
+    dataframe = fm.edgelistIntoMemory()
 
-    return 5+99
+    # Your code here
+
+    fm.backboningToCsv(dataframe)

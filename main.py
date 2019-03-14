@@ -1,15 +1,17 @@
-import fileManipulation as fm
+import fileManagement as fm
 import backboningStep as bbs
 import projetionStep as ps
 
+
+
 def main():
-    fm.fromEdgelistToPandas()
+
+    ps.projetionStep(edgelistFile = "toy_data.txt")
 
     bbs.backboningStep()
 
-    ps.projetionStep()
 
-    profit("?")
+    #profit("?")
 
 if __name__ == '__main__':
     main()
