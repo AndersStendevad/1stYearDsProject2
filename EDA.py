@@ -14,16 +14,24 @@ filename = "toy_data.txt"
 def main():
     G = nx.read_adjlist(path(filename),
     delimiter = " ", nodetype = int)
-
     nodes = nx.algorithms.bipartite.sets(G)
     rows = sorted(list(nodes[1]))
     cols = sorted(list(nodes[0]))
-    X = nm2.simple(G, rows) # I use X so G will be the same for all
-    draw_nicely(X,nodes)
-    #DataFrame = nx.to_pandas_dataframe(G, nodelist=rows)
-    print(DataFrame)
+    allAlg(G,nodes)
+
 
 #####################################
+
+def plot_network(G, factor, weight="weight"):
+    linewidth = [d[weight] * factor for (u, v, d) in G.edges(data = True)]
+    nx.draw_kamada_kawai(G, width = linewidth, labels = {n: n for n in G.nodes})
+    plt.show()
+
+def transform_for_bb(G):
+    G_df = nx.to_pandas_edgelist(G)
+    G_df.columns = ('src', 'trg', 'nij')
+    G_df = bb.make_symmetric(G_df)
+    return G_df
 
 def sample(G,sampleSize):
     import random
@@ -36,10 +44,11 @@ def draw_ugly(G):
     plt.show()
 
 
-def draw_nicely(G,nodes):
+def draw_nicely(G,nodes,factor = 4,weight="weight"):
     rows = sorted(list(nodes[1]))
     cols = sorted(list(nodes[0]))
-    nx.draw_kamada_kawai(G, labels = {
+    linewidth = [d[weight] * factor for (u, v, d) in G.edges(data = True)]
+    nx.draw_kamada_kawai(G,width = linewidth, labels = {
     n:n for n in G.nodes
     },
     node_color =[ 'b' if n in cols else 'r' for n in G.nodes],
