@@ -6,7 +6,7 @@ import networkx as nx
 
 
 def projetionStep(projection_type="simple", freshStart=True):
-    if freshStart == False:
+    if not freshStart:
         return None
     filename = fm.rawData
     path = fm.path(filename)
