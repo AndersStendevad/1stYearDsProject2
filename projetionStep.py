@@ -11,11 +11,15 @@ def projetionStep(projection_type="simple", freshStart=True):
     filename = fm.rawData
     path = fm.path(filename)
     G = nx.read_adjlist(path,delimiter = " ", nodetype = int)
+    print('Started to read in the network')
     nodes = nx.algorithms.bipartite.sets(G)
     customer = sorted(list(nodes[1]))
     queries = sorted(list(nodes[0]))
+    print('Customer projection '+projection_type+' started')
     C = projection(G,customer,projection_type)#projected graph of customers
+    print('Queries projection '+projection_type+' started')
     Q = projection(G,queries,projection_type)#projected graph of queries
+    print('Started to save projections')
     saveProjectoins(C,Q,projection_type,filename)
 
 def saveProjectoins(C,Q,projection_type,filename):

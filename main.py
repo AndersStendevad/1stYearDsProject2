@@ -56,7 +56,7 @@ def choose_projection():
         ps.projetionStep(projection_type="ycn")
     elif choice == 'a':
         for i in projection_types:
-            ps.projectionStep(projection_type=i)
+            ps.projetionStep(projection_type = i)
     else:
         print('Wrong input! Try again!')
         choose_projection()
