@@ -3,7 +3,7 @@ import networkx as nx
 
 ### This is global variables like filenames ###
 
-rawData = "toy_data.txt"
+rawData = "ydata-ysm-advertiser-phrase-adjlist.txt"
 dataFile = "mainData.csv"
 projetionFile = "projetionData.csv"
 backboningFile = "backboningData.csv"

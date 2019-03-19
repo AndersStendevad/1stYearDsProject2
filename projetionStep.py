@@ -5,7 +5,7 @@ import fileManagement as fm
 import networkx as nx
 
 
-def projetionStep(projection_type="simple", freshStart=True):
+def projetionStep(projection_type="hyperbolic", freshStart=True):
     if not freshStart:
         return None
     filename = fm.rawData

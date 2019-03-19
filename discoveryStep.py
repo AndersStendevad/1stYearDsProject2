@@ -5,5 +5,5 @@ def discoveryStep(freshStart=True):
         return None
     dataframe = fm.backboningIntoMemory()
 
-    
+
     fm.communityToCsv(dataframe)

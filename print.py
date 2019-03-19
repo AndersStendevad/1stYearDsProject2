@@ -5,4 +5,4 @@ def printStep(freshStart=True):
         return None
     dataframe = fm.backboningIntoMemory()
     community = fm.communityIntoMemory()
-    print(dataframe)
+    print(dataframe.head())
