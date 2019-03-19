@@ -7,6 +7,7 @@ rawData = "toy_data.txt"
 dataFile = "mainData.csv"
 projetionFile = "projetionData.csv"
 backboningFile = "backboningData.csv"
+communityFile = "communityData.csv"
 
 ### This is the generic functions that enable basic functions ###
 
@@ -30,6 +31,9 @@ def projetionIntoMemory(): # specialcase for projetion
 def backboningIntoMemory(): # specialcase for backboning
     return dataIntoMemory(backboningFile)
 
+def communityIntoMemory(): # specialcase for discovery
+    return dataIntoMemory(communityFile)
+
 ### Special functions that always has the same filenames ###
 
 def projetionToCsv(dataframe):
@@ -37,3 +41,6 @@ def projetionToCsv(dataframe):
 
 def backboningToCsv(dataframe): # specialcase for backboning
     saveToCsv(dataframe,backboningFile) # specialcase for projetion
+
+def communityToCsv(dataframe): # specialcase for discoveryStep
+    saveToCsv(dataframe,communityFile) # specialcase for discoveryStep
