@@ -5,7 +5,7 @@ import fileManagement as fm
 import networkx as nx
 
 
-def projetionStep(projection_type="ycn", freshStart=True):
+def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
     if not freshStart:
         return None
     filename = fm.rawData
@@ -13,24 +13,25 @@ def projetionStep(projection_type="ycn", freshStart=True):
     G = nx.read_adjlist(path,delimiter = " ", nodetype = int)
     print('Started to read in the network')
     nodes = nx.algorithms.bipartite.sets(G)
-    customer = sorted(list(nodes[1]))
-    queries = sorted(list(nodes[0]))
-    print('Customer projection '+projection_type+' started')
-    C = projection(G,customer,projection_type)#projected graph of customers
-    #print('Queries projection '+projection_type+' started')
-    #Q = projection(G,queries,projection_type)#projected graph of queries
-    print('Started to save projections')
-    #saveProjectoins(C,Q,projection_type,filename)
-    customer_df = transform_for_bb(C)
-    fm.projetionToCsv(customer_df)
 
+    if on_nodes == 'b' or on_nodes == 'c':
+        print('Customer projection '+projection_type+' started')
+        customers = sorted(list(nodes[1]))
+        C = projection(G,customers,projection_type)
+        print('Started to save customer projection')
+        saveProjectoin(C,projection_type,filename,'customer')
+    if on_nodes == 'b' or on_nodes == 'q':
+        queries = sorted(list(nodes[0]))
+        print('Queries projection '+projection_type+' started')
+        Q = projection(G,queries,projection_type)#projected graph of queries
+        print('Started to save query projection')
+        saveProjectoin(Q,projection_type,filename,'query')
 
-def saveProjectoins(C,Q,projection_type,filename):
-        customer_df = transform_for_bb(C)
-        query_df = transform_for_bb(Q)
-        filename = filename.split('.')[0]
-        fm.saveToCsv(customer_df,projection_type + '_' + filename + '_custmer.csv')
-        fm.saveToCsv(query_df,projection_type + '_' + filename + '_query.csv')
+def saveProjectoin(G,projection_type,origin_filename,node_type):
+        df = transform_for_bb(G)
+
+        filename = origin_filename.split('.')[0]
+        fm.saveToCsv(df,projection_type + '_' + filename + '_'+node_type+'.csv')
 
 def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''

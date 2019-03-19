@@ -50,23 +50,39 @@ def choose_projection():
     choice = input()
     projection_types = ['simple',"hyperbolic","probs","ycn"]
     if choice == 's':
-        ps.projetionStep()
+        return 'simple'
     elif choice == 'h':
-        ps.projetionStep(projection_type="hyperbolic")
+        return "hyperbolic"
     elif choice == 'p':
-        ps.projetionStep(projection_type="probs")
+        return "probs"
     elif choice == 'y':
-        ps.projetionStep(projection_type="ycn")
+        return "ycn"
     elif choice == 'a':
-        for i in projection_types:
-            ps.projetionStep(projection_type = i)
+        return projection_types
     else:
         print('Wrong input! Try again!')
         choose_projection()
 
+def choose_node_type():
+    print('On which type of nodes do you want to make the projection? \n'+
+    '\'c\' for projection only on customers\n'+
+    '\'q\' for projection only on queries\n'+
+    '\'b\' for projection on both\n')
+    choice = input()
+    if choice == 'c' or choice == 'q' or choice == 'b':
+        return choice
+    else:
+        print('Wrong input! Try again!')
+        choose_node_type()
+
 def projection():
         choosefile()
-        choose_projection()
-
+        projection_type = choose_projection()
+        node_type = choose_node_type()
+        if type(projection_type) == type([1]):
+            for projection in projection_type:
+                ps.projetionStep(projetion,True,node_type)
+        else:
+            ps.projetionStep(projection_type,True,node_type)
 if __name__ == '__main__':
     main()
