@@ -3,12 +3,33 @@ import libraries.network_map2 as nm2
 import libraries.backboning as bb
 import fileManagement as fm
 import networkx as nx
+from os import path
 
 
 def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
     if not freshStart:
         return None
     filename = fm.rawData
+
+    if on_nodes != 'b':
+        out_filename = create_out_filename(projection_type,filename,on_nodes)
+        if projection_exists(out_filename):
+            print('Projection file aready exists!')
+            fm.projetionFile = out_filename
+            exit()
+    else:
+        print('The back boning is going to run on the last existing file!')
+        out_filename = create_out_filename(projection_type,filename,'c')
+        if projection_exists(out_filename):
+            print('Customer projection file aready exists!')
+            fm.projetionFile = out_filename
+        out_filename = create_out_filename(projection_type,filename,'q')
+        if projection_exists(out_filename):
+            print('Query projection file aready exists!')
+            fm.projetionFile = out_filename
+            exit()
+
+
     path = fm.path(filename)
     G = nx.read_adjlist(path,delimiter = " ", nodetype = int)
     print('Started to read in the network')
@@ -19,20 +40,24 @@ def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
         customers = sorted(list(nodes[1]))
         C = projection(G,customers,projection_type)
         print('Started to save customer projection')
-        saveProjectoin(C,projection_type,filename,'customer')
+        saveProjectoin(C,out_filename)
     if on_nodes == 'b' or on_nodes == 'q':
         queries = sorted(list(nodes[0]))
         print('Queries projection '+projection_type+' started')
         Q = projection(G,queries,projection_type)#projected graph of queries
         print('Started to save query projection')
-        saveProjectoin(Q,projection_type,filename,'query')
+        saveProjectoin(Q,out_filename)
 
-def saveProjectoin(G,projection_type,origin_filename,node_type):
+def saveProjectoin(G,out_filename):
         df = transform_for_bb(G)
+        fm.saveToCsv(df,out_filename)
+def projection_exists(out_filename):
+    return path.exists('Data/'+ out_filename)
 
-        filename = origin_filename.split('.')[0]
-        fm.saveToCsv(df,projection_type + '_' + filename + '_'+node_type+'.csv')
-        fm.projetionToCsv(df)
+def create_out_filename(projection_type,origin_filename,node_type):
+    filename = origin_filename.split('.')[0]
+    out_filename =  projection_type + '_' + filename + '_'+node_type+'.csv'
+    return out_filename
 
 def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''
