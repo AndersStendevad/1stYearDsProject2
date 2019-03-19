@@ -32,6 +32,7 @@ def saveProjectoin(G,projection_type,origin_filename,node_type):
 
         filename = origin_filename.split('.')[0]
         fm.saveToCsv(df,projection_type + '_' + filename + '_'+node_type+'.csv')
+        fm.projetionToCsv(df)
 
 def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''
