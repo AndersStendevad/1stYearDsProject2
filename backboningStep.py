@@ -1,6 +1,7 @@
 import libraries.backboning as bb
 import networkx as nx
 import fileManagement as fm
+import print as pr
 
 def backboningStep(backboning_type="noise_corrected",freshStart=True):
     if freshStart == False:
@@ -8,7 +9,7 @@ def backboningStep(backboning_type="noise_corrected",freshStart=True):
 
     dataframe = fm.projetionIntoMemory()
 
-    print('Started '+backboning_type+' backboning')
+    pr.cprint('Started '+backboning_type+' backboning')
     bb_df = backboning(dataframe,backboning_type)
 
     bb_df = bb.thresholding(bb_df,float(input("How about you pick a threshold for removing shit \n")))
@@ -20,7 +21,7 @@ def backboningStep(backboning_type="noise_corrected",freshStart=True):
 
 
 def printInfo(dataframe,start=0,end=10,step=1):
-    print(bb.test_densities(dataframe, start, end, step))
+    pr.cprint(bb.test_densities(dataframe, start, end, step))
 
 def naive(dataframe):
     dataframe = bb.naive(dataframe)

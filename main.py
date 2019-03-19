@@ -6,6 +6,7 @@ import print as pr
 
 def main():
     argument = input("Choose <ps>, <bbs>, <ds>, <pr>, <all> \n")
+    argument = input(pr.blue + "Choose <ps>, <bbs>, <ds>, <pr>, <all> \n" + pr.escape)
 
     if argument == "all":
 
@@ -29,19 +30,19 @@ def choosefile():
 
     toy_filename = "toy_data.txt"
     real_filename = "ydata-ysm-advertiser-phrase-adjlist.txt"
-    print('Type T if you want to work with the toy data set and R if with the real')
+    pr.cprint('Type T if you want to work with the toy data set and R if with the real')
     choice = input()
     if choice == 'R':
         fm.rawData = real_filename
     elif choice == 'T':
         fm.rawData = toy_filename
     else:
-        print('Wrong input! Try again!')
+        pr.cprint('Wrong input! Try again!', color = '\033[91m')
         choosefile()
 
 def choose_projection():
 
-    print('Your projection options are :\n'+
+    pr.cprint('Your projection options are :\n'+
     '\'s\' for simple projection\n'+
     '\'h\' for hyperbolic projection\n'+
     '\'p\' for  resource allocation projection\n'+
@@ -60,11 +61,11 @@ def choose_projection():
     elif choice == 'a':
         return projection_types
     else:
-        print('Wrong input! Try again!')
+        pr.cprint('Wrong input! Try again!', color = '\033[91m')
         choose_projection()
 
 def choose_node_type():
-    print('On which type of nodes do you want to make the projection? \n'+
+    pr.cprint('On which type of nodes do you want to make the projection? \n'+
     '\'c\' for projection only on customers\n'+
     '\'q\' for projection only on queries\n'+
     '\'b\' for projection on both\n')
@@ -72,7 +73,7 @@ def choose_node_type():
     if choice == 'c' or choice == 'q' or choice == 'b':
         return choice
     else:
-        print('Wrong input! Try again!')
+        pr.cprint('Wrong input! Try again!', color = '\033[91m')
         choose_node_type()
 
 def projection():
