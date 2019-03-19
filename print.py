@@ -4,6 +4,5 @@ def printStep(freshStart=True):
     if not freshStart:
         return None
     dataframe = fm.backboningIntoMemory()
-    community = communityIntoMemory()
-    print(community)
+    community = fm.communityIntoMemory()
     print(dataframe)
