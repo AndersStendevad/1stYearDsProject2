@@ -4,7 +4,7 @@ import projetionStep as ps
 import discoveryStep as ds
 
 def main():
-    argument = input("write ps , bbs, ds, all \n")
+    argument = input("Choose <ps>, <bbs>, <ds>, <all> \n")
     if argument == "all":
 
         projection()
