@@ -5,7 +5,7 @@ import fileManagement as fm
 import networkx as nx
 
 
-def projetionStep(projection_type="hyperbolic", freshStart=True):
+def projetionStep(projection_type="ycn", freshStart=True):
     if not freshStart:
         return None
     filename = fm.rawData
@@ -17,10 +17,13 @@ def projetionStep(projection_type="hyperbolic", freshStart=True):
     queries = sorted(list(nodes[0]))
     print('Customer projection '+projection_type+' started')
     C = projection(G,customer,projection_type)#projected graph of customers
-    print('Queries projection '+projection_type+' started')
-    Q = projection(G,queries,projection_type)#projected graph of queries
+    #print('Queries projection '+projection_type+' started')
+    #Q = projection(G,queries,projection_type)#projected graph of queries
     print('Started to save projections')
-    saveProjectoins(C,Q,projection_type,filename)
+    #saveProjectoins(C,Q,projection_type,filename)
+    customer_df = transform_for_bb(C)
+    fm.projetionToCsv(customer_df)
+
 
 def saveProjectoins(C,Q,projection_type,filename):
         customer_df = transform_for_bb(C)
