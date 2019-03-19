@@ -1,5 +1,6 @@
 import pandas as pd
 import networkx as nx
+import print as pr
 
 ### This is global variables like filenames ###
 
@@ -37,9 +38,11 @@ def communityIntoMemory(): # specialcase for discovery
 ### Special functions that always has the same filenames ###
 
 def projetionToCsv(dataframe):
+    print(dataframe)
     saveToCsv(dataframe,projetionFile)
 
 def backboningToCsv(dataframe): # specialcase for backboning
+    print(dataframe)
     saveToCsv(dataframe,backboningFile) # specialcase for projetion
 
 def communityToCsv(dataframe): # specialcase for discoveryStep
