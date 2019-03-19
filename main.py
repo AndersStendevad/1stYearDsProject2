@@ -6,7 +6,8 @@ import print as pr
 
 
 def main():
-    argument = input("write ps , bbs, ds, pr ,all \n")
+    argument = input("Choose <ps>, <bbs>, <ds>, <pr>, <all> \n")
+
     if argument == "all":
 
         ps.projetionStep()
