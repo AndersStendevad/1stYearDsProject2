@@ -16,7 +16,7 @@ def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
         if projection_exists(out_filename):
             print('Projection file aready exists!')
             fm.projetionFile = out_filename
-            exit()
+            return
     else:
         print('The back boning is going to run on the last existing file!')
         out_filename = create_out_filename(projection_type,filename,'c')
@@ -27,9 +27,7 @@ def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
         if projection_exists(out_filename):
             print('Query projection file aready exists!')
             fm.projetionFile = out_filename
-            exit()
-
-
+            return
     path = fm.path(filename)
     G = nx.read_adjlist(path,delimiter = " ", nodetype = int)
     print('Started to read in the network')
@@ -40,13 +38,19 @@ def projetionStep(projection_type="ycn", freshStart=True, on_nodes = 'b'):
         customers = sorted(list(nodes[1]))
         C = projection(G,customers,projection_type)
         print('Started to save customer projection')
+        if C == "Cannot run":
+            return
         saveProjectoin(C,out_filename)
+        fm.projetionFile = out_filename
     if on_nodes == 'b' or on_nodes == 'q':
         queries = sorted(list(nodes[0]))
         print('Queries projection '+projection_type+' started')
         Q = projection(G,queries,projection_type)#projected graph of queries
+        if Q == "Cannot run":
+            return
         print('Started to save query projection')
         saveProjectoin(Q,out_filename)
+        fm.projetionFile = out_filename
 
 def saveProjectoin(G,out_filename):
         df = transform_for_bb(G)
@@ -72,7 +76,11 @@ def simple(G,nodes):
 
 def hyperbolic(G,nodes):
     '''Does hyperbolic projection'''
-    return nm2.hyperbolic(G,nodes)
+    try:
+        return nm2.hyperbolic(G,nodes)
+    except MemoryError:
+        print("MemoryError with hyperbolic\n this is a known error. The program will continue if possible\n")
+        return "Cannot run"
 
 def resource_allocation(G,nodes):
     '''Does resource allocation projection'''

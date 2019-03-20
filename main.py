@@ -17,6 +17,7 @@ def main():
         ds.discoveryStep()
 
         pr.printStep()
+
     elif argument == "ps":
         projection()
 
@@ -26,13 +27,16 @@ def main():
     elif argument == "ds":
         ds.discoveryStep()
 
+    elif argument == "pr":
+        ds.printStep()
+
 def projection():
         intr.choose_origin_file()
         projection_type = intr.choose_projection()
         node_type = intr.choose_node_type()
         if type(projection_type) == type([1]):
             for projection in projection_type:
-                ps.projetionStep(projetion,True,node_type)
+                ps.projetionStep(projection,True,node_type)
         else:
             ps.projetionStep(projection_type,True,node_type)
 if __name__ == '__main__':
