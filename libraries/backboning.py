@@ -50,7 +50,7 @@ def make_symmetric(table):
    table2.drop("src", 1, inplace = True)
    table2.drop("trg", 1, inplace = True)
    table2 = table2.rename(columns = {"new_src": "src", "new_trg": "trg"})
-   table = pd.concat([table, table2], axis = 0, sort = True)
+   table = pd.merge([table, table2], axis = 0, sort = True)
    table = table.drop_duplicates(subset = ["src", "trg"])
    return table
 
@@ -135,7 +135,7 @@ def noise_corrected(table, undirected = False, return_self_loops = False, calcul
    table["expected_pij"] = table["alpha_post"] / (table["alpha_post"] + table["beta_post"])
    table["variance_nij"] = table["expected_pij"] * (1 - table["expected_pij"]) * table["n.."]
    table["d"] = (1.0 / (table["ni."] * table["n.j"])) - (table["n.."] * ((table["ni."] + table["n.j"]) / ((table["ni."] * table["n.j"]) ** 2)))
-   table["variance_cij"] = table["variance_nij"] * (((2 * (table["kappa"] + (table["nij"] * table["d"]))) / (((table["kappa"] * table["nij"]) + 1) ** 2)) ** 2) 
+   table["variance_cij"] = table["variance_nij"] * (((2 * (table["kappa"] + (table["nij"] * table["d"]))) / (((table["kappa"] * table["nij"]) + 1) ** 2)) ** 2)
    table["sdev_cij"] = table["variance_cij"] ** .5
    if not return_self_loops:
       table = table[table["src"] != table["trg"]]

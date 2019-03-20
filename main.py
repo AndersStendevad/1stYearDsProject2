@@ -10,9 +10,9 @@ def main():
 
     if argument == "all":
 
-        projection()
+        projection_name = projection()
 
-        bbs.backboningStep()
+        backboning(projection_name)
 
         ds.discoveryStep()
 
@@ -22,7 +22,7 @@ def main():
         projection()
 
     elif argument == "bbs":
-        bbs.backboningStep()
+        backboning(projection)
 
     elif argument == "ds":
         ds.discoveryStep()
@@ -33,11 +33,23 @@ def main():
 def projection():
         intr.choose_origin_file()
         projection_type = intr.choose_projection()
+        projection_name = projection_type
         node_type = intr.choose_node_type()
         if type(projection_type) == type([1]):
             for projection in projection_type:
                 ps.projetionStep(projection,True,node_type)
+                projection_name = projection
         else:
             ps.projetionStep(projection_type,True,node_type)
+        return projection_name
+
+def backboning(projection_name):
+    backboning_type = intr.choose_backboning()
+    if type(backboning_type) == type([1]):
+        for backboning in backboning_type:
+            bbs.backboningStep(backboning_type = backboning, projection = projection_name)
+    else:
+        bbs.backboningStep(backboning_type = backboning_type, projection = projection_name)
+
 if __name__ == '__main__':
     main()

@@ -28,7 +28,7 @@ def choose_origin_file():
         fm.rawData = toy_filename
     else:
         print('Wrong input! Try again!')
-        choosefile()
+        choose_origin_file()
 
 def choose_projection():
 
@@ -53,6 +53,36 @@ def choose_projection():
     else:
         print('Wrong input! Try again!')
         choose_projection()
+
+def choose_backboning():
+
+    print('Your backboning options are :\n'+
+    '\'na\' for naive backboning\n'+
+    '\'nc\' for noise corrected backboning\n'+
+    '\'ds\' for doubly stochastic backboning\n'+
+    '\'df\' for disparity filter backboning\n'+
+    '\'hs\' for high salience skeleton backboning\n'+
+    '\'st\' for maximum spanning tree backboning\n'+
+    '\'a\' to create a file for all the backbonings\n')
+    choice = input()
+    backboning_types = ['naive',"noise_corrected","doubly_stochastic","disparity_filter","high_salience_skeleton","maximum_spanning_tree"]
+    if choice == 'na':
+        return 'naive'
+    elif choice == 'nc':
+        return "noise_corrected"
+    elif choice == 'ds':
+        return "doubly_stochastic"
+    elif choice == 'df':
+        return "disparity_filter"
+    elif choice == 'hs':
+        return "high_salience_skeleton"
+    elif choice == 'st':
+        return "maximum_spanning_tree"
+    elif choice == 'a':
+        return backboning_types
+    else:
+        print('Wrong input! Try again!')
+        choose_backboning()
 
 def choose_node_type():
     print('On which type of nodes do you want to make the projection? \n'+

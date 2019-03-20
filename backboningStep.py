@@ -1,10 +1,17 @@
 import libraries.backboning as bb
 import networkx as nx
 import fileManagement as fm
+from os import path
 
-def backboningStep(backboning_type="disparity_filter",freshStart=True):
+def backboningStep(backboning_type="disparity_filter", projection = 'Unknown', freshStart=True):
     if freshStart == False:
         return None
+    filename = fm.rawData
+    out_filename = create_out_filename(backboning_type,filename,projection)
+    if backboning_exists(out_filename):
+        print('backboning file aready exists!')
+        fm.backboningFile = out_filename
+        return
 
     dataframe = fm.projetionIntoMemory()
 
@@ -13,8 +20,18 @@ def backboningStep(backboning_type="disparity_filter",freshStart=True):
     print(printInfo(bb_df,start=0.000,end=1,step=0.025))
     bb_df = bb.thresholding(bb_df,float(input("How about you pick a threshold for removing shit \n")))
 
-    fm.backboningToCsv(bb_df)
+    saveBackboning(bb_df,out_filename)
+    fm.communityFile = out_filename
 
+def saveBackboning(bb_df,out_filename):
+        fm.saveToCsv(bb_df,out_filename)
+def backboning_exists(out_filename):
+    return path.exists('Data/'+ out_filename)
+
+def create_out_filename(backboning_type,origin_filename,projection):
+    filename = origin_filename.split('.')[0]
+    out_filename =  backboning_type + '_' + filename + '_'+projection+'.csv'
+    return out_filename
 
 def printInfo(dataframe,start=0,end=1,step=1):
     print(bb.test_densities(dataframe, start, end, step))
