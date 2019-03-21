@@ -5,4 +5,4 @@ def printStep(freshStart=True):
         return None
     dataframe = fm.backboningIntoMemory()
     community = fm.communityIntoMemory()
-    print(dataframe.sort_values(by="score", ascending=False).head())
+    print(dataframe.sort_values(by="nij", ascending=False).head())

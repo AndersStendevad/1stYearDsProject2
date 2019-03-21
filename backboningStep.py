@@ -21,7 +21,7 @@ def backboningStep(backboning_type="disparity_filter", projection = 'Unknown', f
     bb_df = bb.thresholding(bb_df,float(input("How about you pick a threshold for removing shit \n")))
 
     saveBackboning(bb_df,out_filename)
-    fm.communityFile = out_filename
+    fm.backboningFile = out_filename = out_filename
 
 def saveBackboning(bb_df,out_filename):
         fm.saveToCsv(bb_df,out_filename)

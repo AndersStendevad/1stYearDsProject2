@@ -4,31 +4,19 @@ import projetionStep as ps
 import discoveryStep as ds
 import print as pr
 import interface as intr
+import visualizations as vi
 
 def main():
-    argument = intr.step_choice()
+    projection_name = projection()
 
-    if argument == "all":
+    backboning(projection_name)
 
-        projection_name = projection()
+    ds.discoveryStep()
 
-        backboning(projection_name)
+    vi.visualizationsStep()
 
-        ds.discoveryStep()
+    pr.printStep()
 
-        pr.printStep()
-
-    elif argument == "ps":
-        projection()
-
-    elif argument == "bbs":
-        backboning(projection)
-
-    elif argument == "ds":
-        ds.discoveryStep()
-
-    elif argument == "pr":
-        ds.printStep()
 
 def projection():
         intr.choose_origin_file()

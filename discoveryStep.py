@@ -9,14 +9,7 @@ from os import path
 def discoveryStep(freshStart=True):
     if not freshStart:
         return None
-    dataframe = fm.backboningIntoMemory()
-
-    ##turn .csv to pandas dataframe
-    with open('Data/communitydata.csv') as f:
-    	pdcsv = pd.read_csv(f)
-    	df = pd.DataFrame(pdcsv)
-
-    df = pd.DataFrame(df)
+    df = fm.backboningIntoMemory()
     B = nx_graph(df)
     C = nx.from_pandas_edgelist(df, source='src', target='trg', edge_attr='score') #same as B, but with networkx
     treshold = int(input("What should minimum number of nodes in community be? "))
@@ -33,7 +26,7 @@ def discoveryStep(freshStart=True):
     print(relevant_list, n_communities)
 
 
-    fm.communityToCsv(dataframe)
+    fm.communityToCsv(df)
 
 
 #turn pandas data frame to edgelist
