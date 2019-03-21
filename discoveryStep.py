@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from networkx.algorithms import community
 import numpy as np
 from os import path
+import question_one as q1
 
 def discoveryStep(freshStart=True):
     if not freshStart:
@@ -24,6 +25,7 @@ def discoveryStep(freshStart=True):
     		relevant_list.append(i)
 
     print(relevant_list, n_communities)
+    q1.question_one(relevant_list)
 
 
     fm.communityToCsv(df)
