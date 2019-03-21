@@ -1,0 +1,4 @@
+Total customers: 45.9678
+Total queries: 193.582
+
+
