@@ -50,7 +50,7 @@ def make_symmetric(table):
    table2.drop("src", 1, inplace = True)
    table2.drop("trg", 1, inplace = True)
    table2 = table2.rename(columns = {"new_src": "src", "new_trg": "trg"})
-   table = pd.merge([table, table2], axis = 0, sort = True)
+   table = pd.concat([table, table2], axis = 0, sort = True)
    table = table.drop_duplicates(subset = ["src", "trg"])
    return table
 
