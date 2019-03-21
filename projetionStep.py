@@ -67,6 +67,7 @@ def transform_for_bb(G):
     '''Transforms graph into a pandas DataFrame'''
     G_df = nx.to_pandas_edgelist(G)
     G_df.columns = ('src', 'trg', 'nij')
+    print(G_df)
     G_df = bb.make_symmetric(G_df)
     return G_df
 
