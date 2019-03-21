@@ -31,18 +31,6 @@ def nx_graph (df):
         
     return B
 
-#turn pandas dataframe to biadjency list
-def nx_graph_from_biadjacency_pandas_df(df):
-    B = nx.Graph()
-    for i in df.index:
-        B.add_node(i, bipartite=1)
-        for j in df.columns:
-            B.add_node(j, bipartite=0)
-            if (df.ix[i,j] > 0):
-                B.add_edge(i, j, weight=df.ix[i,j])
-    return B
-
-A = nx_graph_from_biadjacency_pandas_df(df)
 B = nx_graph(df)
 C = nx.from_pandas_edgelist(df, source='src', target='trg', edge_attr='score') #same as B, but with networkx
 
@@ -59,16 +47,15 @@ def find_community(G):
 		#returns a pair of sets of nodes representing the bipartition.
 		return list(nx.algorithms.community.kernighan_lin_bisection(G))
 
-def relevant_community(community, treshold):
-    n_communities = 0
-    relevant_list = []
-    for i in community:
-        if len(i) < treshold:
-            continue
-        else:
-            n_communities += 1
-            relevant_list.append(i)
-            
-    return relevant_list, n_communities
+treshold = int(input("What should minimum number of nodes in community be? "))
 
-print(relevant_community(find_community(A), 5000))
+n_communities = 0
+relevant_list = []
+for i in find_community(B):
+	if len(i) < treshold:
+		continue
+	else:
+		n_communities += 1
+		relevant_list.append(i)
+            
+print(relevant_list, n_communities)
