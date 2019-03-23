@@ -41,7 +41,7 @@ def naive(dataframe):
     printInfo(dataframe)
     return dataframe
 
-def noise_corrected(dataframe):
+def noise_corrected(dataframe,start=-10,end=10,step=1):
     dataframe = bb.noise_corrected(dataframe)
     printInfo(dataframe)
     return dataframe
@@ -53,7 +53,7 @@ def doubly_stochastic(dataframe):
 
 def disparity_filter(dataframe):
     dataframe = bb.disparity_filter(dataframe)
-    printInfo(dataframe)
+    printInfo(dataframe,start=0.000,end=3,step=0.075)
     return dataframe
 
 def high_salience_skeleton(dataframe):
