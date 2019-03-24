@@ -24,7 +24,7 @@ def question_three(community_list):
 
 def readCommunity(filename):
     communities = fm.dataIntoMemory(filename).fillna(-1)
-    list_with_NaN_communities = communities.values.tolist()
+    list_with_NaN_communities = [communities.ix[:,x].tolist() for x in communities.columns.tolist()]
     list_communities = []
     for list in list_with_NaN_communities:
         list_communities.append([value for value in list if value != -1])
