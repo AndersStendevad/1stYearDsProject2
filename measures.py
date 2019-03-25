@@ -64,3 +64,6 @@ class Measures:
         for list in list_with_NaN_communities:
             list_communities.append([value for value in list if value != -1])
         return list_communities[1:]
+
+    def find_customer_degree(self,node_id):
+        return self.G.degree(node_id)
