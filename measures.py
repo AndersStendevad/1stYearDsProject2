@@ -5,11 +5,12 @@ import pandas as pd
 class Measures:
     G = None
 
-    def __init__(self, adj_list_filename,  graph=None):
+    def __init__(self, adj_list_filename=None,  graph=None):
         print("Loading graph: ", adj_list_filename)
         if graph != None:
             G = graph
-        else:
+
+        elif adj_list_filename != None:
             self.G = nx.read_adjlist(fm.path(adj_list_filename),delimiter = " ", nodetype = int)
             G_set = nx.bipartite.maximum_matching(self.G)
 
@@ -17,7 +18,6 @@ class Measures:
     # Queries repeat - use set() to get a list of unique queries.
     def get_queries(self, customers):
         return [v for x,v in list(self.G.edges(customers))]
-
 
 
     # Returns a sorted list (of tuples) of counts of all queries assiciated with a list 
@@ -56,6 +56,8 @@ class Measures:
     def get_value(self, tup, idx=1):
         return [x[idx] for x in tup][0]
 
+    # Takes a file and returns a list communities.
+    # A community consists of a list of customer nodes.
     def readCommunity(filename):
         communities = fm.dataIntoMemory(filename).fillna(-1)
         list_with_NaN_communities = [communities.ix[:,x].tolist() for x in communities.columns.tolist()]
@@ -63,3 +65,4 @@ class Measures:
         for list in list_with_NaN_communities:
             list_communities.append([value for value in list if value != -1])
         return list_communities
+
