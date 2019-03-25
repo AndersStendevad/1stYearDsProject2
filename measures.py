@@ -19,13 +19,13 @@ class Measures:
     def get_queries(self, customers):
         return [v for x,v in list(self.G.edges(customers))]
 
-    # Returns a sorted list (of tuples) of counts of all queries assiciated with a list 
+    # Returns a sorted list (of tuples) of counts of all queries assiciated with a list
     # of customers (that is, a community)
     #
     # Format: (query, count) ///  e.g. (54555, 27)
     def get_query_counts(self, customers, sort=True):
         query_dict = {}
-    
+
         for query in self.get_queries(customers):
             query_dict[query] = query_dict.get(query, 0) + 1
 
@@ -34,17 +34,17 @@ class Measures:
         else:
             return query_dict
 
-    # Returns the share of customers in a given community who bid on queries 
-    # of that comminuty. Sorted. 
+    # Returns a sorted list (of tuples) of all queries and the share of customers who bit on
+    # that query in a given community.
     #
     # Format: (query, share%) /// e.g. (54555, 0.27)
     def get_query_shares(self, customers):
-        return [(x[0],(x[1]/len(customers)*100)) for x in get_query_counts(customers)]
+        return [(x[0],(x[1]/len(customers)*100)) for x in self.get_query_counts(customers)]
 
     # Returns a list of all queries in a community and thier respective
-    # usage in the given community relative to its usage across all comminities. 
+    # usage in the given community relative to its usage across all comminities.
     def get_query_representation(self, community, communities):
-        query_counts = get_query_counts(community)[:10]
+        query_counts = self.get_query_counts(community)[:10]
 
         for query_count in query_counts:
             count = [x[1] for x in query_count][0]
@@ -57,11 +57,10 @@ class Measures:
 
     # Takes a file and returns a list communities.
     # A community consists of a list of customer nodes.
-    def readCommunity(filename):
+    def readCommunity(self,filename):
         communities = fm.dataIntoMemory(filename).fillna(-1)
         list_with_NaN_communities = [communities.ix[:,x].tolist() for x in communities.columns.tolist()]
         list_communities = []
         for list in list_with_NaN_communities:
             list_communities.append([value for value in list if value != -1])
         return list_communities[1:]
-
