@@ -19,7 +19,6 @@ class Measures:
     def get_queries(self, customers):
         return [v for x,v in list(self.G.edges(customers))]
 
-
     # Returns a sorted list (of tuples) of counts of all queries assiciated with a list 
     # of customers (that is, a community)
     #
@@ -64,5 +63,5 @@ class Measures:
         list_communities = []
         for list in list_with_NaN_communities:
             list_communities.append([value for value in list if value != -1])
-        return list_communities
+        return list_communities[1:]
 
