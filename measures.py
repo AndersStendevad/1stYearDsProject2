@@ -18,6 +18,8 @@ class Measures:
     def get_queries(self, customers):
         return [v for x,v in list(self.G.edges(customers))]
 
+
+
     # Returns a sorted list (of tuples) of counts of all queries assiciated with a list 
     # of customers (that is, a community)
     #
@@ -53,3 +55,11 @@ class Measures:
     # Returns the value of a tuple
     def get_value(self, tup, idx=1):
         return [x[idx] for x in tup][0]
+
+    def readCommunity(filename):
+        communities = fm.dataIntoMemory(filename).fillna(-1)
+        list_with_NaN_communities = [communities.ix[:,x].tolist() for x in communities.columns.tolist()]
+        list_communities = []
+        for list in list_with_NaN_communities:
+            list_communities.append([value for value in list if value != -1])
+        return list_communities
