@@ -22,7 +22,7 @@ class Measures:
     # Returns a sorted list (of tuples) of counts of all queries assiciated with a list
     # of customers (that is, a community)
     #
-    # Format: (query, count) ///  e.g. (54555, 27)
+    # Format: [(query, count)..] ///  e.g. (54555, 27)
     def get_query_counts(self, customers, sort=True):
         query_dict = {}
 
@@ -37,7 +37,7 @@ class Measures:
     # Returns a sorted list (of tuples) of all queries and the share of customers who bit on
     # that query in a given community.
     #
-    # Format: (query, share%) /// e.g. (54555, 0.27)
+    # Format: [(query, share%)..] /// e.g. (54555, 0.27)
     def get_query_shares(self, customers):
         return [(x[0],(x[1]/len(customers)*100)) for x in self.get_query_counts(customers)]
 

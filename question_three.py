@@ -3,7 +3,6 @@ import networkx as nx
 import measures as me
 import pandas as pd
 
-
 def main():
     measures = me.Measures(fm.rawData)
     list_communities = measures.readCommunity("communityDataPropsNoiseCorrected.csv")
@@ -27,8 +26,6 @@ def main():
 
 def question_three(community_list):
     pass
-
-
 
 def readCommunity(filename):
     communities = fm.dataIntoMemory(filename).fillna(-1)
