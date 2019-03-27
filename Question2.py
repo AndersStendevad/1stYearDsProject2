@@ -63,3 +63,6 @@ def community_to_csv(rc):
 b = community_to_csv(kjkk)
 
 fm.saveToCsv(b,'kjkk.csv')
+
+for i in range(1, len(kjkk)):
+    print(B.edges(kjkk[i]))
